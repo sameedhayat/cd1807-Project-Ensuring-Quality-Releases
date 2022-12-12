@@ -5,7 +5,7 @@ client_secret = "xaf8Q~YVSeFjqeLcwbkHM8Ph3NpV3-VBxi1.ub21"
 tenant_id = "5c37ae03-3741-4077-8a10-afb1f66af92d"
 
 # Resource Group/Location
-location = "eastus"
+location = "centralus"
 resource_group = "Azuredevops"
 application_type = "Project3"
 
