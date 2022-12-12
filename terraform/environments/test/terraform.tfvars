@@ -1,13 +1,13 @@
 # Azure subscription vars
-subscription_id = "c761712a-772e-4832-b4d5-73b3a4b12e0b"
-client_id = "1d068103-fe11-41a4-80d7-a03676a020d0"
-client_secret = "dnN8Q~hKUB2sD_4YBxXE_DnWfIG1eqA0PVmp4dgW"
-tenant_id = "f958e84a-92b8-439f-a62d-4f45996b6d07"
+subscription_id = "d16698d6-2a95-484e-a247-2499f1c015fc"
+client_id = "558f69c6-081e-4b54-80fd-f052181c21e3"
+client_secret = "xaf8Q~YVSeFjqeLcwbkHM8Ph3NpV3-VBxi1.ub21"
+tenant_id = "5c37ae03-3741-4077-8a10-afb1f66af92d"
 
 # Resource Group/Location
-location = "East US"
+location = "eastus"
 resource_group = "Azuredevops"
-application_type = "UdacityProject3"
+application_type = "Project3"
 
 # Network
 virtual_network_name = "vn"
