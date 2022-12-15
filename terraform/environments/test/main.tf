@@ -18,6 +18,11 @@ module "resource_group" {
   resource_group       = "${var.resource_group}"
   location             = "${var.location}"
 }
+
+data "azurerm_resource_group" "test" {
+  name = "Azuredevops"
+}
+
 module "network" {
   source               = "../../modules/network"
   address_space        = "${var.address_space}"
@@ -25,7 +30,7 @@ module "network" {
   virtual_network_name = "${var.virtual_network_name}"
   application_type     = "${var.application_type}"
   resource_type        = "NET"
-  resource_group       = "${module.resource_group.resource_group_name}"
+  resource_group       = "${data.azurerm_resource_group.test.name}"
   address_prefix_test  = "${var.address_prefix_test}"
 }
 
@@ -34,7 +39,7 @@ module "nsg-test" {
   location         = "${var.location}"
   application_type = "${var.application_type}"
   resource_type    = "NSG"
-  resource_group   = "${module.resource_group.resource_group_name}"
+  resource_group   = "${data.azurerm_resource_group.test.name}"
   subnet_id        = "${module.network.subnet_id_test}"
   address_prefix_test = "${var.address_prefix_test}"
 }
@@ -43,14 +48,14 @@ module "appservice" {
   location         = "${var.location}"
   application_type = "${var.application_type}"
   resource_type    = "AppService"
-  resource_group   = "${module.resource_group.resource_group_name}"
+  resource_group   = "${data.azurerm_resource_group.test.name}"
 }
 module "publicip" {
   source           = "../../modules/publicip"
   location         = "${var.location}"
   application_type = "${var.application_type}"
   resource_type    = "publicip"
-  resource_group   = "${module.resource_group.resource_group_name}"
+  resource_group   = "${data.azurerm_resource_group.test.name}"
 }
 
 module "vm" {
@@ -58,7 +63,7 @@ module "vm" {
   location         = "${var.location}"
   application_type = "${var.application_type}"
   resource_type    = "vm"
-  resource_group   = "${module.resource_group.resource_group_name}"
+  resource_group   = "${data.azurerm_resource_group.test.name}"
   subnet_id        = "${module.network.subnet_id_test}"
   public_ip        = "${module.publicip.public_ip_address_id}"
 }
