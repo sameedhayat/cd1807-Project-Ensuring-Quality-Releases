@@ -79,7 +79,7 @@ stages:
       displayName: Terraform plan
       inputs:
         provider: 'azurerm'
-        command: 'plan'
+        command: 'plan -lock=false'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
         
