@@ -72,16 +72,18 @@ stages:
     #  displayName: 
     #  inputs:
     #   secureFile: 
+   
+    # Run Terraform Import
+    # ToDo: Change the workingDirectory path, as applicable to you
     - task: TerraformTaskV3@3
       displayName: Terraform import
       inputs:
         provider: 'azurerm'
         command: 'custom'
-        environmentServiceNameAzureRM: $(azureServiceConnectionId)'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         customCommand: 'terraform import module.resource_group.azurerm_resource_group.test /subscriptions/c761712a-772e-4832-b4d5-73b3a4b12e0b/resourceGroups/Azuredevops'
-        outputTo: 'console'
-    
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
+
     # Run Terraform Apply
     # ToDo: Change the workingDirectory path, as applicable to you
     - task: TerraformTaskV3@3
