@@ -80,7 +80,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'custom'
-        customCommand: 'terraform import module.resource_group.azurerm_resource_group.test /subscriptions/c761712a-772e-4832-b4d5-73b3a4b12e0b/resourceGroups/Azuredevops'
+        customCommand: 'import module.resource_group.azurerm_resource_group.test /subscriptions/c761712a-772e-4832-b4d5-73b3a4b12e0b/resourceGroups/Azuredevops'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
