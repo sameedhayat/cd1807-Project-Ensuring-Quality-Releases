@@ -133,10 +133,7 @@
 							"    }\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Status field has value 'success'\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.status).to.equal(\"success\");\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
