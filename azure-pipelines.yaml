@@ -102,4 +102,44 @@ stages:
     #     command: 'destroy'
     #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
     #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
+    
+    - task: CmdLine@2
+      displayName: 'Install npm and Newman'
+      inputs:
+        script: |
+          npm install -g npm
+          npm install -g newman
+        workingDirectory: $(System.DefaultWorkingDirectory)
+    
+    # Postman Data Validation Test Suite    
+    # ToDo: Verify the working directory and the newman scripts
+    - task: CmdLine@2
+      displayName: Run Data Validation Tests
+      continueOnError: true
+      inputs:
+        script: newman --version
+        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+    
+    # Postman Regression Test Suite    
+    - task: CmdLine@2
+      displayName: Run Regression Tests
+      continueOnError: true
+      inputs:
+        script: newman run ./automatedtesting/postman/RegressionTest.json --reporters cli,junit --reporter-junit-export ./automatedtesting/postman/regressiontest.xml
+        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+    
+    # Postman Validation Test Suite    
+    - task: CmdLine@2
+      displayName: Run Validation Tests
+      continueOnError: true
+      inputs:
+        script: newman run ./automatedtesting/postman/ValidationTest.json --reporters cli,junit --reporter-junit-export ./automatedtesting/postman/validationtest.xml
+        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
+    # Postman - Publish Results 
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/automatedtesting/postman/*.xml'
+        mergeTestResults: true
+        testRunTitle:  'Postman test'
