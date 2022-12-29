@@ -125,7 +125,7 @@ stages:
       displayName: Run Regression Tests
       continueOnError: true
       inputs:
-        script: newman run ./automatedtesting/postman/RegressionTest.json --reporters cli,junit --reporter-junit-export ./automatedtesting/postman/regressiontest.xml
+        script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/RegressionTest.json --reporters cli,junit --reporter-junit-export ./automatedtesting/postman/regressiontest.xml
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     
     # Postman Validation Test Suite    
@@ -133,7 +133,7 @@ stages:
       displayName: Run Validation Tests
       continueOnError: true
       inputs:
-        script: newman run ./automatedtesting/postman/ValidationTest.json --reporters cli,junit --reporter-junit-export ./automatedtesting/postman/validationtest.xml
+        script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/ValidationTest.json --reporters cli,junit --reporter-junit-export ./automatedtesting/postman/validationtest.xml
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
     # Postman - Publish Results 
