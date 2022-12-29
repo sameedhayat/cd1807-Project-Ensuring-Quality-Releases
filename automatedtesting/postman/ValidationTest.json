@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "a570da76-809f-4485-a4a7-b1e76db85dd2",
+		"name": "Validation Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "837569"
+	},
+	"item": [
+		{
+			"name": "Create Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    if (pm.response.status === 200) {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 429\", function () {\r",
+							"    if (pm.response.status === 429) {\r",
+							"        pm.response.to.have.status(429);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Request data validation\", function () {\r",
+							"    var jsonData = JSON.parse(pm.request.body.toString());\r",
+							"    pm.expect(jsonData).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData).to.have.property(\"salary\");\r",
+							"    pm.expect(jsonData).to.have.property(\"age\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains employee ID\", function () {\r",
+							"    var jsonData = pm.response.json()['data'];\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"John\",\r\n    \"salary\": \"46000\",\r\n    \"age\": \"28\"\r\n}"
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/create",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    if (pm.response.status === 200) {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 429\", function () {\r",
+							"    if (pm.response.status === 429) {\r",
+							"        pm.response.to.have.status(429);\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"salary\": \"47000\",\r\n    \"age\": \"29\"\r\n}"
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/update/5",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    if (pm.response.status === 200) {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 429\", function () {\r",
+							"    if (pm.response.status === 429) {\r",
+							"        pm.response.to.have.status(429);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status field has value 'success'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.equal(\"success\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/delete/4",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a single employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    if (pm.response.status === 200) {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 429\", function () {\r",
+							"    if (pm.response.status === 429) {\r",
+							"        pm.response.to.have.status(429);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains employee data\", function () {\r",
+							"    var jsonData = pm.response.json()['data'];\r",
+							"    pm.expect(jsonData).to.have.property(\"id\", 1);\r",
+							"    pm.expect(jsonData).to.have.property(\"employee_name\");\r",
+							"    pm.expect(jsonData).to.have.property(\"employee_salary\");\r",
+							"    pm.expect(jsonData).to.have.property(\"employee_age\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employee/1",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
