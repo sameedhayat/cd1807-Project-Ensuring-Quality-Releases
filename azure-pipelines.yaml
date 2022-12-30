@@ -220,7 +220,7 @@ stages:
   - deployment: VMDeploy
     displayName: Selenium Tests
     environment:
-      name:  'test'
+      name:  '$(environmentName)'
       resourceType: VirtualMachine
       tags: selenium
     strategy:
