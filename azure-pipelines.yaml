@@ -198,7 +198,7 @@ stages:
   # ToDo: Provide <environment name> you created in your DevOps project
   - deployment: FakeRestAPI
     pool:
-      vmImage: 'ubuntu 20.04'      
+      vmImage: 'ubuntu-latest'      
     environment: '$(environmentName)'
     strategy:
       runOnce:
