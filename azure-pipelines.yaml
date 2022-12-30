@@ -125,7 +125,7 @@ stages:
       displayName: Run Regression Tests
       continueOnError: true
       inputs:
-        script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/RegressionTest.json --reporters cli,junit --reporter-junit-export ./automatedtesting/postman/regressiontest.xml
+        script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/RegressionTest.json --reporters cli,junit --reporter-junit-export regressiontest.xml
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
     
     # Postman Validation Test Suite    
@@ -133,14 +133,14 @@ stages:
       displayName: Run Validation Tests
       continueOnError: true
       inputs:
-        script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/ValidationTest.json --reporters cli,junit --reporter-junit-export ./automatedtesting/postman/validationtest.xml
+        script: newman run $(System.DefaultWorkingDirectory)/automatedtesting/postman/ValidationTest.json --reporters cli,junit --reporter-junit-export validationtest.xml
         workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
 
     # Postman - Publish Results 
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '$(System.DefaultWorkingDirectory)/automatedtesting/postman/*.xml'
+        testResultsFiles: '**/junit-report-*.xml'
         mergeTestResults: true
         testRunTitle:  'Postman test'
     
@@ -207,12 +207,10 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              ConnectionType: 'AzureRM'
               azureSubscription: '$(azureServiceConnectionId)'
               appName: 'Project3-AppService'
               appType: webApp
               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
-              deploymentMethod: 'auto' 
 
   #--------------------------------------------#  
   # Selenium | Functional UI Tests
