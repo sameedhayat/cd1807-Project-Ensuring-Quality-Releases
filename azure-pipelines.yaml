@@ -212,4 +212,4 @@ stages:
               appName: 'Project3-AppService'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-              DeploymentType: zipDeploy 
+              deploymentMethod: 'auto' 
