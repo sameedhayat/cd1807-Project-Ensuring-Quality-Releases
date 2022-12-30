@@ -27,6 +27,8 @@ stages:
 - stage: Build
   jobs:
   - job: BuildInfrastructure
+    pool:
+      vmImage: ubuntu-latest
     steps:
     #--------------------------------------------#  
     # Use Terraform to create the Infrastructure      
@@ -239,22 +241,10 @@ stages:
                 sudo apt-get install python3-pip -y
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
+                sudo apt-get install -y chromium-chromedriver
                 pip3 install selenium
-                
-                # Download Chromedriver
-                wget https://chromedriver.chromium.org/downloads/chromedriver_linux64.zip
-
-                # Unzip Chromedriver
-                unzip chromedriver_linux64.zip
-
-                # Make Chromedriver executable
-                chmod +x chromedriver
-
-                # Add Chromedriver to PATH
-                export PATH=$PATH:./chromedriver     
-                
-                
+            
                 cd $(Pipeline.Workspace)/drop-uitests
-                sudo mkdir /var/logs
-                sudo python3 login.py > /var/logs/uitest-logs.log
+                python3 login.py > uitest-logs.log
+                sudo cp uitest-logs.log /var/logs/uitest-logs.log
                   
