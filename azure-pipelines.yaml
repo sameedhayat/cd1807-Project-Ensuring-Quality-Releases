@@ -227,7 +227,8 @@ stages:
         deploy:
           steps:
           - download: current
-            artifact: drop-ui-tests
+            displayName: 'Download Selenium'
+            artifact: drop-uitests
             
           - task: Bash@3
             inputs:
