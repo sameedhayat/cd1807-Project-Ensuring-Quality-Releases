@@ -256,5 +256,5 @@ stages:
                 
                 cd $(Pipeline.Workspace)/drop-uitests
                 sudo mkdir /var/logs
-                python3 login.py > /var/logs/uitest-logs.log
+                sudo python3 login.py > /var/logs/uitest-logs.log
                   
