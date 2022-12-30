@@ -211,8 +211,8 @@ stages:
               azureSubscription: '$(azureServiceConnectionId)'
               appName: 'Project3-AppService'
               appType: webApp
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-              deploymentMethod: 'auto'
+              packageForLinux: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+              DeploymentType: zipDeploy 
 
   #--------------------------------------------#  
   # Selenium | Functional UI Tests
