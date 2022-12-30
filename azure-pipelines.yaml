@@ -207,6 +207,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
+              ConnectionType: 'AzureRM'
               azureSubscription: '$(azureServiceConnectionId)'
               appName: 'Project3-AppService'
               appType: webApp
