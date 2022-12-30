@@ -252,9 +252,10 @@ stages:
                 chmod +x chromedriver
 
                 # Add Chromedriver to PATH
-                export PATH=$PATH:$(Pipeline.Workspace)/chromedriver     
+                export PATH=$PATH:./chromedriver     
                 
-                unzip -o $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-uitests.zip -d .
+                
+                cd $(Pipeline.Workspace)/drop-uitests
                 sudo mkdir /var/logs
                 python3 login.py > /var/logs/uitest-logs.log
                   
