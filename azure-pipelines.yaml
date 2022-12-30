@@ -218,44 +218,44 @@ stages:
   # Selenium | Functional UI Tests
   # ToDo: 
   - deployment: VMDeploy
-  displayName: Selenium Tests
-  environment:
-    name:  '$(environmentName)'
-    resourceType: VirtualMachine
-    tags: selenium
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-        - download: current
-          artifact: drop-ui-tests
-          
-        - task: Bash@3
-          inputs:
-            targetType: 'inline'
-            script: |           
-              
-              ! /bin/bash
-              
-              sudo apt-get upgrade -y
-              sudo apt-get install python3-pip -y
-              sudo apt-get install unzip -y
-              sudo apt-get install -y chromium-browser
-              pip3 install selenium
-              
-              # Download Chromedriver
-              wget https://chromedriver.chromium.org/downloads/chromedriver_linux64.zip
-
-              # Unzip Chromedriver
-              unzip chromedriver_linux64.zip
-
-              # Make Chromedriver executable
-              chmod +x chromedriver
-
-              # Add Chromedriver to PATH
-              export PATH=$PATH:./chromedriver     
-              
-              unzip -o $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-uitests.zip -d .
-              sudo mkdir /var/logs
-              python3 login.py > /var/logs/uitest-logs.log
+    displayName: Selenium Tests
+    environment:
+      name:  '$(environmentName)'
+      resourceType: VirtualMachine
+      tags: selenium
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop-ui-tests
+            
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |           
                 
+                ! /bin/bash
+                
+                sudo apt-get upgrade -y
+                sudo apt-get install python3-pip -y
+                sudo apt-get install unzip -y
+                sudo apt-get install -y chromium-browser
+                pip3 install selenium
+                
+                # Download Chromedriver
+                wget https://chromedriver.chromium.org/downloads/chromedriver_linux64.zip
+
+                # Unzip Chromedriver
+                unzip chromedriver_linux64.zip
+
+                # Make Chromedriver executable
+                chmod +x chromedriver
+
+                # Add Chromedriver to PATH
+                export PATH=$PATH:./chromedriver     
+                
+                unzip -o $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-uitests.zip -d .
+                sudo mkdir /var/logs
+                python3 login.py > /var/logs/uitest-logs.log
+                  
