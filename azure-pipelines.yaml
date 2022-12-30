@@ -220,7 +220,7 @@ stages:
   - deployment: VMDeploy
     displayName: Selenium Tests
     environment:
-      name:  '$(environmentName)'
+      name:  'test'
       resourceType: VirtualMachine
       tags: selenium
     strategy:
@@ -253,7 +253,7 @@ stages:
                 chmod +x chromedriver
 
                 # Add Chromedriver to PATH
-                export PATH=$PATH:./chromedriver     
+                export PATH=$PATH:$(Pipeline.Workspace)/chromedriver     
                 
                 unzip -o $(Pipeline.Workspace)/drop-uitests/$(Build.BuildId)-uitests.zip -d .
                 sudo mkdir /var/logs
